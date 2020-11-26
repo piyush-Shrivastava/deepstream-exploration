@@ -1,0 +1,158 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "video-analytics-pipeline.fullname" . }}
+  labels:
+{{ include "video-analytics-pipeline.labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "video-analytics-pipeline.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "video-analytics-pipeline.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+    # {{- with .Values.imagePullSecrets }}
+    #   imagePullSecrets:
+    #     {{- toYaml . | nindent 8 }}
+    # {{- end }}
+      containers:
+        - name: "{{ .Chart.Name }}-1"
+          image: {{ .Values.repository }}
+          imagePullPolicy: {{ .Values.imageConfig.pullPolicy }}
+          workingDir: "{{ .Values.workingDir.dspath }}"
+          command: ["python3", {{ .Values.command.appname }}]
+          #command: ["nvidia-smi"]
+          args: [{{ .Values.command.apparg1}},
+                {{ .Values.command.apparg2}},
+                {{ .Values.command.apparg3}}, 
+                {{ .Values.command.apparg4}},
+                {{ .Values.command.apparg5}},  
+                {{ .Values.command.apparg6}},
+                {{ .Values.command.apparg7}}, 
+                {{ .Values.command.apparg8}}, 
+                {{ .Values.command.apparg9}}, 
+                {{ .Values.command.apparg10}}, 
+                {{ .Values.command.apparg11}}, 
+                {{ .Values.command.apparg12}}, 
+                {{ .Values.command.apparg13}}, 
+                {{ .Values.command.apparg14}}, 
+                {{ .Values.command.apparg15}}, 
+                {{ .Values.command.apparg16}}] 
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          ports: 
+            - name: http
+              containerPort: 8554
+              protocol: TCP
+          volumeMounts:
+            - name: ipmount
+              mountPath: {{ .Values.mountpath}}
+              subPath: {{ .Values.subpath }}
+      volumes:
+        - name: ipmount
+          configMap:
+            name: {{ include "video-analytics-pipeline.fullname" . }}-configmap	  
+{{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "video-analytics-pipeline.fullname" . }}-webui
+  labels:
+    name: {{ include "video-analytics-pipeline.fullname" . }}-webui
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      name: {{ include "video-analytics-pipeline.fullname" . }}-webui
+  template:
+    metadata:
+      labels:
+        name: {{ include "video-analytics-pipeline.fullname" . }}-webui
+    spec:
+      containers:
+        - name: "{{ .Chart.Name }}-webui-1"
+          image: {{ .Values.webui }}
+          imagePullPolicy: {{ .Values.imageConfig.pullPolicy }}
+          env:
+          - name: NODE_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+          - name: DS_PORT
+            value: "{{ .Values.service.nodePort }}"
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "bash /tmp/serverstart.sh; cp -r /tmp/play.html /usr/local/antmedia/webapps/WebRTCApp/play.html"]
+          resources: {}
+          volumeMounts:
+          - mountPath: /tmp/play.html
+            name: play
+            subPath: play.html
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.webuiPort }}
+              protocol: TCP
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: {{ include "video-analytics-pipeline.fullname" . }}-webui-configmap
+        name: play
+---
+{{- $root := . }}
+{{- range $api := $root.Values.apis }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "video-analytics-pipeline.fullname" $root }}-rtsp-{{ $api.name }}
+  labels:
+    name: {{ include "video-analytics-pipeline.fullname" $root }}-rtsp-{{ $api.name }}
+spec:
+  replicas: {{ $root.Values.replicaCount }}
+  selector:
+    matchLabels:
+      name: {{ include "video-analytics-pipeline.fullname" $root }}-rtsp-{{ $api.name }}
+  template:
+    metadata:
+      labels:
+        name: {{ include "video-analytics-pipeline.fullname" $root }}-rtsp-{{ $api.name }}
+    spec:
+      containers:
+        - name: "{{ $root.Chart.Name }}-rtsp-1-{{ $api.name }}"
+          image: {{ $root.Values.rtsp }}
+          imagePullPolicy: {{ $root.Values.imageConfig.pullPolicy }}
+          workingDir: "{{ $root.Values.workingDir.rtsppath }}"
+          command: ["python3", "{{ $root.Values.command.rtspappname }}","-path", "{{ $api.command}}", "-width", "{{ $api.argwidth}}", "-height", "{{ $api.argheight}}" ]
+          resources: {}
+          ports:
+            - name: http
+              containerPort: 8554
+              protocol: TCP
+          volumeMounts:
+            - name: rtsp-stream-mount
+              mountPath: {{ $root.Values.streammountPath}}
+              readOnly: true
+      volumes:
+        - name: rtsp-stream-mount
+          persistentVolumeClaim:
+            claimName: ds-input-pvclaim
+            readOnly: true	
+---
+{{- end }}

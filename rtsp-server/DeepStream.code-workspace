@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "/Users/meetdave/summer_2020/DeepStream/deepstream"
+		},
+		{
+			"path": "/Users/meetdave/summer_2020/DeepStream/sostd-stream-subscriber-app"
+		}
+	],
+	"settings": {
+		"cloudcode.profile-cluster-map": {
+			"[default]": "gke_qp-nvidia-rd-2020-06_us-east1-c_cluster-1"
+		},
+		"cloudcode.profile-registry-map": {
+			"[default]": "gcr.io/qp-nvidia-rd-2020-06"
+		}
+	}
+}

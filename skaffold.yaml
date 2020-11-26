@@ -1,0 +1,40 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+build:
+  artifacts:
+  - image: us.gcr.io/qp-nvidia-rd-2020-06/deepstream
+    # context: ds-app
+    sync:
+      infer:
+      - 'python/apps/**/*.py'
+      - 'python/notebooks/streams/*.h264'
+      - 'python/notebooks/streams/*.mp4'
+    docker:
+      dockerfile: ds-app/Dockerfile
+  - image: us.gcr.io/qp-nvidia-rd-2020-06/gst
+    # context: rtsp-server
+    sync:
+      infer:
+      - 'python/notebooks/*.py'
+      - 'python/notebooks/streams/*.h264'
+      - 'python/notebooks/streams/*.mp4'        
+    docker:
+      dockerfile: rtsp-server/Dockerfile
+  # googleCloudBuild:
+  #   projectId: qp-nvidia-rd-2020-06
+  local : {}
+  tagPolicy:
+    gitCommit: {}
+deploy:
+  statusCheckDeadlineSeconds: 600
+  helm:
+    releases:
+    - name: videoanalytics
+      chartPath: helm-chart
+      artifactOverrides:
+        repository: us.gcr.io/qp-nvidia-rd-2020-06/deepstream
+        rtsp: us.gcr.io/qp-nvidia-rd-2020-06/gst
+          
+
+
+
