@@ -9,21 +9,21 @@ command:
   #apparg2: file:///opt/nvidia/deepstream/deepstream-5.0/samples/streams/sample_720p.h264
 
   apparg1: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input1:8554/input
-  apparg2: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input2:8554/input
-  apparg3: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input3:8554/input
-  apparg4: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input4:8554/input
-  apparg5: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input5:8554/input
-  apparg6: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input6:8554/input
-  apparg7: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input7:8554/input
-  apparg8: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input8:8554/input
-  apparg9: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input9:8554/input
-  apparg10: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input10:8554/input
-  apparg11: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input11:8554/input
-  apparg12: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input12:8554/input
-  apparg13: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input13:8554/input
-  apparg14: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input14:8554/input
-  apparg15: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input15:8554/input
-  apparg16: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input16:8554/input
+  #apparg2: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input2:8554/input
+  #apparg3: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input3:8554/input
+  #apparg4: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input4:8554/input
+  #apparg5: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input5:8554/input
+  #apparg6: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input6:8554/input
+  #apparg7: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input7:8554/input
+  #apparg8: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input8:8554/input
+  #apparg9: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input9:8554/input
+  #apparg10: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input10:8554/input
+  #apparg11: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input11:8554/input
+  #apparg12: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input12:8554/input
+  #apparg13: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input13:8554/input
+  #apparg14: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input14:8554/input
+  #apparg15: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input15:8554/input
+  #apparg16: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input16:8554/input
 
   appname: deepstream_facedetect.py
   rtspappname: vid2rtspso.py
@@ -77,79 +77,4 @@ apis:
   argwidth: 640
   argheight: 480
   nodePort: 31117
-- name: input2
-  command: streams/Sub2.avi
-  argwidth: 640
-  argheight: 480
-  nodePort: 31118
-- name: input3
-  command: streams/Sub3.avi
-  argwidth: 640
-  argheight: 480
-  nodePort: 31119
-- name: input4
-  command: streams/Sub4.avi
-  argwidth: 640
-  argheight: 480
-  nodePort: 31120
-- name: input5
-  command: streams/Sub5.avi
-  argwidth: 640
-  argheight: 480
-  nodePort: 31121
-- name: input6
-  command: streams/Sub6.avi
-  argwidth: 640
-  argheight: 480
-  nodePort: 31122
-- name: input7
-  command: streams/Sub1.avi
-  argwidth: 640
-  argheight: 480
-  nodePort: 31123
-- name: input8
-  command: streams/Sub1.avi
-  argwidth: 640
-  argheight: 480
-  nodePort: 31124
-- name: input9
-  command: streams/Sub1.avi
-  argwidth: 640
-  argheight: 480
-  nodePort: 31125
-- name: input10
-  command: streams/Sub1.avi
-  argwidth: 640
-  argheight: 480
-  nodePort: 31126
-- name: input11
-  command: streams/Sub1.avi
-  argwidth: 640
-  argheight: 480
-  nodePort: 31127
-- name: input12
-  command: streams/Sub1.avi
-  argwidth: 640
-  argheight: 480
-  nodePort: 31128
-- name: input13
-  command: streams/Sub1.avi
-  argwidth: 640
-  argheight: 480
-  nodePort: 31129
-- name: input14
-  command: streams/Sub1.avi
-  argwidth: 640
-  argheight: 480
-  nodePort: 31130
-- name: input15
-  command: streams/Sub1.avi
-  argwidth: 640
-  argheight: 480
-  nodePort: 31131
-- name: input16
-  command: streams/Sub1.avi
-  argwidth: 640
-  argheight: 480
-  nodePort: 31132
 

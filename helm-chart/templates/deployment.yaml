@@ -22,12 +22,13 @@ spec:
     # {{- end }}
       containers:
         - name: "{{ .Chart.Name }}-1"
-          image: {{ .Values.repository }}
+          image: gcr.io/qp-tmeg-bu-2020-11/dsapp
           imagePullPolicy: {{ .Values.imageConfig.pullPolicy }}
           workingDir: "{{ .Values.workingDir.dspath }}"
-          command: ["python3", {{ .Values.command.appname }}]
+          command: ["tail", "-f"]
+          #command: ["python3", {{ .Values.command.appname }}]
           #command: ["nvidia-smi"]
-          args: [{{ .Values.command.apparg1}}] 
+          #args: [{{ .Values.command.apparg1}}] 
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           ports: 
@@ -121,10 +122,11 @@ spec:
     spec:
       containers:
         - name: "{{ $root.Chart.Name }}-rtsp-1-{{ $api.name }}"
-          image: {{ $root.Values.rtsp }}
+          image: gcr.io/qp-tmeg-bu-2020-11/rtspserver
           imagePullPolicy: {{ $root.Values.imageConfig.pullPolicy }}
           workingDir: "{{ $root.Values.workingDir.rtsppath }}"
-          command: ["python3", "{{ $root.Values.command.rtspappname }}","-path", "{{ $api.command}}", "-width", "{{ $api.argwidth}}", "-height", "{{ $api.argheight}}" ]
+          command: ["tail", "-f"]
+          #command: ["python3", "{{ $root.Values.command.rtspappname }}","-path", "{{ $api.command}}", "-width", "{{ $api.argwidth}}", "-height", "{{ $api.argheight}}" ]
           resources: {}
           ports:
             - name: http
