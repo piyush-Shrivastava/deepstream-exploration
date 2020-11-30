@@ -27,22 +27,7 @@ spec:
           workingDir: "{{ .Values.workingDir.dspath }}"
           command: ["python3", {{ .Values.command.appname }}]
           #command: ["nvidia-smi"]
-          args: [{{ .Values.command.apparg1}},
-                {{ .Values.command.apparg2}},
-                {{ .Values.command.apparg3}}, 
-                {{ .Values.command.apparg4}},
-                {{ .Values.command.apparg5}},  
-                {{ .Values.command.apparg6}},
-                {{ .Values.command.apparg7}}, 
-                {{ .Values.command.apparg8}}, 
-                {{ .Values.command.apparg9}}, 
-                {{ .Values.command.apparg10}}, 
-                {{ .Values.command.apparg11}}, 
-                {{ .Values.command.apparg12}}, 
-                {{ .Values.command.apparg13}}, 
-                {{ .Values.command.apparg14}}, 
-                {{ .Values.command.apparg15}}, 
-                {{ .Values.command.apparg16}}] 
+          args: [{{ .Values.command.apparg1}}] 
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           ports: 
@@ -151,8 +136,8 @@ spec:
               readOnly: true
       volumes:
         - name: rtsp-stream-mount
-          persistentVolumeClaim:
-            claimName: ds-input-pvclaim
-            readOnly: true	
+          hostPath:
+            path: /abc
+            type: DirectoryOrCreate	
 ---
 {{- end }}
