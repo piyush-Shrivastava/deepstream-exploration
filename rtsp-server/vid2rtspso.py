@@ -63,9 +63,9 @@ class SensorFactory(GstRtspServer.RTSPMediaFactory):
                 buf.offset = timestamp
                 self.number_frames += 1
                 retval = src.emit('push-buffer', buf)
-                # print('pushed buffer, frame {}, duration {} ns, durations {} s'.format(self.number_frames,
-                                                                                    #   self.duration,
-                                                                                    #   self.duration / Gst.SECOND))
+                print('pushed buffer, frame {}, duration {} ns, durations {} s'.format(self.number_frames,
+                                                                                       self.duration,
+                                                                                       self.duration / Gst.SECOND))
                 if retval != Gst.FlowReturn.OK:
                     print(retval)
         else:
