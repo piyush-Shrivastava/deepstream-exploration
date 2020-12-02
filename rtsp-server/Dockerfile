@@ -38,9 +38,9 @@ RUN apt-get update && apt-get install -y \
  
 ENV HOME /root
 
-RUN mkdir /opt/python/rtspserver
+RUN mkdir -p /opt/python/rtspserver
 
-COPY vid2rtspso.py /opt/python/rtspserver
+COPY . /opt/python/rtspserver
 
 WORKDIR /opt/python/rtspserver
 

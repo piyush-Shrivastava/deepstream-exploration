@@ -3,7 +3,7 @@ cameras:
   camera1: null
 workingDir:
   dspath: /opt/nvidia/deepstream/deepstream-5.0/sources/python/apps/deepstream-facedetect
-  rtsppath: /opt/python/notebooks
+  rtsppath: /opt/python/rtspserver
 command:
   apparg1: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input1:8554/input
   #apparg2: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input2:8554/input
