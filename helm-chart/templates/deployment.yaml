@@ -22,7 +22,7 @@ spec:
     # {{- end }}
       containers:
         - name: "{{ .Chart.Name }}-1"
-          image: "{{ .Values.image.rtspserver.repository }}/{{ .Values.image.rtsp.name }}:{{ .Values.image.rtsp.tag }}"
+          image: "{{ .Values.image.rtspserver.repository }}/{{ .Values.image.rtspserver.name }}:{{ .Values.image.rtspserver.tag }}"
           imagePullPolicy: {{ .Values.imageConfig.pullPolicy }}
           workingDir: "{{ .Values.workingDir.dspath }}"
           command: ["tail", "-f"]

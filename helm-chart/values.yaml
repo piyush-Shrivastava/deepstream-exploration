@@ -28,11 +28,11 @@ fullnameOverride: ""
 
 image:
   rtspserver: 
-    repository: gcr.io/galvanic-ripsaw-273111
+    repository: gcr.io/qp-tmeg-bu-2020-11
     name: rtspserver
     tag: v1
   dsapp:
-    repository: gcr.io/galvanic-ripsaw-273111
+    repository: gcr.io/qp-tmeg-bu-2020-11
     name: dsapp
     tag: v1
   webui:
