@@ -22,7 +22,7 @@ spec:
     # {{- end }}
       containers:
         - name: "{{ .Chart.Name }}-1"
-          image: "{{ $root.Values.image.dsapp.repository }}/{{ $root.Values.image.dsapp.name }}:{{ $root.Values.image.dsapp.tag }}"
+          image: "{{ .Values.image.dsapp.repository }}/{{ .Values.image.dsapp.name }}:{{ .Values.image.dsapp.tag }}"
           imagePullPolicy: {{ .Values.imageConfig.pullPolicy }}
           workingDir: "{{ .Values.workingDir.dspath }}"
           command: ["tail", "-f"]
@@ -122,7 +122,7 @@ spec:
     spec:
       containers:
         - name: "{{ $root.Chart.Name }}-rtsp-1-{{ $api.name }}"
-          image: "{{ .Values.image.rtspserver.repository }}/{{ .Values.image.rtspserver.name }}:{{ .Values.image.rtspserver.tag }}"
+          image: "{{ $root.Values.image.rtspserver.repository }}/{{ $root.Values.image.rtspserver.name }}:{{ $root.Values.image.rtspserver.tag }}"
           imagePullPolicy: {{ $root.Values.imageConfig.pullPolicy }}
           workingDir: "{{ $root.Values.workingDir.rtsppath }}"
           command: ["tail", "-f"]
