@@ -5,9 +5,6 @@ workingDir:
   dspath: /opt/nvidia/deepstream/deepstream-5.0/sources/python/apps/deepstream-facedetect
   rtsppath: /opt/python/notebooks
 command:
-  #apparg1: file:///opt/nvidia/deepstream/deepstream-5.0/samples/streams/sample_720p.h264
-  #apparg2: file:///opt/nvidia/deepstream/deepstream-5.0/samples/streams/sample_720p.h264
-
   apparg1: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input1:8554/input
   #apparg2: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input2:8554/input
   #apparg3: rtsp://videoanalytics-video-analytics-pipeline-rtsp-input3:8554/input
@@ -29,15 +26,16 @@ command:
   rtspappname: vid2rtspso.py
 fullnameOverride: ""
 
-# image:
-#   repository: us.gcr.io/qp-nvidia-rd-2020-06/deepstream
-#   tag: 0.1
-  # webui: anguda/ant-media:1.0
-#   rtsp: us.gcr.io/qp-nvidia-rd-2020-06/gst:0.6
-
-webui: anguda/ant-media:1.0
-
-
+image:
+  rtsp: 
+    repository:
+    tag:
+  dsapp:
+    repository:
+    tag:
+  webui:
+    repository: anguda
+    tag: ant-media:1.0
 
 imageConfig:
   pullPolicy: IfNotPresent

@@ -1,4 +1,4 @@
-FROM  ubuntu:18.04
+FROM ubuntu:18.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=America/New_York
@@ -38,9 +38,11 @@ RUN apt-get update && apt-get install -y \
  
 ENV HOME /root
 
-COPY python /opt/python
+RUN mkdir /opt/python/rtspserver
 
-WORKDIR /opt/python/notebooks
+COPY vid2rtspso.py /opt/python/rtspserver
+
+WORKDIR /opt/python/rtspserver
 
 CMD ["python3", "vid2rtspso.py"]
 
