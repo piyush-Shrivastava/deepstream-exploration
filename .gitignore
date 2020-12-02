@@ -73,8 +73,3 @@ typings
 # model
 *.etlt
 *.engine
-
-# video
-*.h264
-*.mp4
-*.avi
