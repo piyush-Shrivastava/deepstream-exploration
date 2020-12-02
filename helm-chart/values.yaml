@@ -27,15 +27,18 @@ command:
 fullnameOverride: ""
 
 image:
-  rtsp: 
-    repository:
-    tag:
+  rtspserver: 
+    repository: gcr.io/galvanic-ripsaw-273111
+    name: rtspserver
+    tag: v1
   dsapp:
-    repository:
-    tag:
+    repository: gcr.io/galvanic-ripsaw-273111
+    name: dsapp
+    tag: v1
   webui:
     repository: anguda
-    tag: ant-media:1.0
+    name: ant-media 
+    tag: 1.0
 
 imageConfig:
   pullPolicy: IfNotPresent
