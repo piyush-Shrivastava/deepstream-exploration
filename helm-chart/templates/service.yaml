@@ -23,7 +23,8 @@ metadata:
   labels:
     name: {{ include "video-analytics-pipeline.fullname" . }}-webui
 spec:
-  type: {{ .Values.service.type }}
+  # type: {{ .Values.service.type }}
+  type: LoadBalancer
   ports:
     - port: {{ .Values.service.webuiPort }}
       targetPort: http
